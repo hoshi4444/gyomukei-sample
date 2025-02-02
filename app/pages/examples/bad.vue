@@ -30,11 +30,9 @@ const {
   search,
   postDialog,
   editDialog,
-  deleteDialog,
   selectStaff,
   onPost,
   onEdit,
-  onDelete,
   confirmPost,
   confirmEdit,
   confirmDelete,
@@ -116,7 +114,7 @@ const addStaff = () => {
                 color="error"
                 variant="text"
                 icon="mdi-trash-can-outline"
-                @click="onDelete(item)"
+                @click="confirmDelete(item)"
               >
                 こちらを押してください
               </v-btn>
@@ -157,26 +155,6 @@ const addStaff = () => {
             @cancel="cancel"
             @confirm="confirmEdit"
           />
-        </template>
-      </v-card>
-    </v-dialog>
-
-    <v-dialog v-model="deleteDialog">
-      <v-card>
-        <template #title> 削除 </template>
-        <template v-if="selectStaff" #text>
-          削除すると元に戻すことができません。
-
-          <div class="d-flex align-center">
-            <v-spacer />
-            <v-btn
-              variant="elevated"
-              color="primary"
-              @click="confirmDelete(selectStaff)"
-            >
-              削除する
-            </v-btn>
-          </div>
         </template>
       </v-card>
     </v-dialog>
