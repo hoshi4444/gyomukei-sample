@@ -174,6 +174,7 @@ const confirmFilter = () => {
             <v-btn
               variant="elevated"
               color="error"
+              prepend-icon="mdi-check"
               @click="confirmDelete(selectStaff)"
             >
               削除する
