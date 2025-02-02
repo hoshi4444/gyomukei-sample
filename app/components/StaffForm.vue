@@ -52,8 +52,8 @@ const confirmDisabled = computed(
 
     <div class="d-flex align-center">
       <ul style="height: 64px" class="px-6 text-caption text-red">
-        <li v-if="!name">・氏名は必ず入力してください。</li>
-        <li v-if="!email">・メールアドレスは必ず入力してください。</li>
+        <li v-if="!name">氏名は必ず入力してください。</li>
+        <li v-if="!email">メールアドレスは必ず入力してください。</li>
       </ul>
       <v-spacer />
       <v-btn variant="text" @click="emits('cancel')"> キャンセル </v-btn>

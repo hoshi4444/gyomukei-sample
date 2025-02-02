@@ -23,6 +23,16 @@ const {
   cancel,
   snackbar,
 } = useStaffs();
+
+const confirmFilter = () => {
+  snackbar.show = true;
+  snackbar.color = "success";
+  snackbar.text = "スタッフの表示条件を変更しました。";
+
+  setTimeout(() => {
+    cancel();
+  }, 3000);
+};
 </script>
 <template>
   <v-container :max-width="1200">
@@ -43,6 +53,8 @@ const {
         </div>
         <v-spacer />
 
+        <staff-filter-dialog @confirm="confirmFilter" />
+
         <v-btn color="primary" prepend-icon="mdi-account-plus" @click="onPost">
           スタッフ新規登録
         </v-btn>
@@ -62,7 +74,7 @@ const {
               <v-text-field
                 v-model="search"
                 prepend-icon="mdi-magnify"
-                label="ID・氏名・メールアドレスで検索"
+                label="ID・氏名・メールアドレスで絞り込む"
                 hide-details
                 density="compact"
               />

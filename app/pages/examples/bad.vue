@@ -61,6 +61,7 @@ const addStaff = () => {
     </div>
 
     <v-divider class="my-2" />
+    <bad-staff-filter />
     <v-container fluid>
       <v-row>
         <v-container>
