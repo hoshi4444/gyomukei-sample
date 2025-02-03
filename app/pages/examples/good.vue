@@ -24,6 +24,30 @@ const {
   snackbar,
 } = useStaffs();
 
+const isIrregularStaff = (item: StaffItem) => {
+  return !item.email || !item.name || !item.position;
+};
+
+const hasIrregular = computed(() =>
+  staffItems.value.some((item) => isIrregularStaff(item))
+);
+
+const rowProps = (props: { item: StaffItem }) => {
+  const item = props.item;
+  return {
+    class: {
+      "bg-warning": isIrregularStaff(item),
+    },
+  };
+};
+
+// 本当はスクロールした方が良い
+const searchIrregular = () => {
+  const find = staffItems.value.find((item) => isIrregularStaff(item));
+  if (!find) return;
+  search.value = find.name;
+};
+
 const confirmFilter = () => {
   snackbar.show = true;
   snackbar.color = "success";
@@ -66,6 +90,7 @@ const confirmFilter = () => {
             height="60vh"
             :search="search"
             :headers="headers"
+            :row-props="rowProps"
             :items="staffItems"
             :filter-keys="['id', 'name', 'email']"
             no-data-text="データがありません"
@@ -79,6 +104,15 @@ const confirmFilter = () => {
                 density="compact"
               />
               <div class="py-2 d-flex align-center">
+                <v-btn
+                  v-if="hasIrregular"
+                  color="warning"
+                  size="x-small"
+                  prepend-icon="mdi-alert"
+                  @click="searchIrregular"
+                >
+                  設定が不足しているスタッフがいます
+                </v-btn>
                 <v-spacer />
                 <div>
                   {{ internalItems.length }} / {{ staffItems.length }} 件表示
